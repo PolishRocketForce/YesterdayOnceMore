@@ -1,26 +1,28 @@
-// import React from 'react';
-// import { View, Text, Button } from 'react-native';
-// import { NavigationProp } from '@react-navigation/native';
-
-// export default function Register({ navigation }: { navigation: NavigationProp<any> }) {
-//     return (
-//         <View>
-//             <Text>Register</Text>
-//             <Button title="Dashboard" onPress={() => navigation.navigate('Dashboard')} />
-//         </View>
-//     );
-// }
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
+import supabase from '../config/supabaseClient';  // Ensure the path is correct
 
 const RegisterScreen = () => {
-  const [name, setName] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleRegister = () => {
-    // Add your registration logic here
-    Alert.alert('Register', `Name: ${name}, Email: ${email}`);
+  const handleRegister = async () => {
+    setLoading(true);
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password
+    });
+    
+    setLoading(false);
+    
+    if (error) {
+      Alert.alert('Error', error.message);
+    } else {
+      Alert.alert('Success', 'Account created successfully. Please check your email for verification.');
+    }
   };
 
   return (
@@ -47,7 +49,7 @@ const RegisterScreen = () => {
         onChangeText={setPassword}
         secureTextEntry
       />
-      <Button title="Register" onPress={handleRegister} />
+      <Button title="Register" onPress={handleRegister} disabled={loading} />
     </View>
   );
 };
