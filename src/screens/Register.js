@@ -1,33 +1,19 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
-import supabase from '../config/supabaseClient';  // Ensure the path is correct
 
 const RegisterScreen = () => {
-  
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
 
-  const handleRegister = async () => {
-    setLoading(true);
-    const { data, error } = await supabase.auth.signUp({
-      email,
-      password
-    });
-    
-    setLoading(false);
-    
-    if (error) {
-      Alert.alert('Error', error.message);
-    } else {
-      Alert.alert('Success', 'Account created successfully. Please check your email for verification.');
-    }
+  const handleRegister = () => {
+    // Add your registration logic here
+    Alert.alert('Register', `Name: ${name}, Email: ${email}`);
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Create an account</Text>
+      <Text style={styles.title}>Register</Text>
       <TextInput
         style={styles.input}
         placeholder="Name"
@@ -49,7 +35,7 @@ const RegisterScreen = () => {
         onChangeText={setPassword}
         secureTextEntry
       />
-      <Button title="Register" onPress={handleRegister} disabled={loading} />
+      <Button title="Register" onPress={handleRegister} />
     </View>
   );
 };

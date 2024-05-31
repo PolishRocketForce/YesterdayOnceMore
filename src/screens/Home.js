@@ -1,10 +1,9 @@
 import React from 'react';
-import { View, Text, Button} from 'react-native';
-import { useNavigation, NavigationProp } from '@react-navigation/native';
-import Register from './Register';
-import Login from './Login';
+import { View, Text, Button } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
-export default function Home({ navigation }: { navigation: NavigationProp<any> }) {
+export default function Home() {
+    const navigation = useNavigation();
 
     return (
         <View>
