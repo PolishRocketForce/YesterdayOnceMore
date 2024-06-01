@@ -2,8 +2,9 @@ const { View, Text, TextInput, TouchableOpacity, ScrollView } = require('react-n
 import styles from './style';
 import { useState } from 'react';
 import axios from 'axios';
+import { useNavigation } from '@react-navigation/native';
 
-function Register() {
+function Register({ navigation }) {
   const [name, setName] = useState('');
   const [nameVerify, setNameVerify] = useState(false);
   const [email, setEmail] = useState('');
@@ -20,7 +21,10 @@ function Register() {
 
     axios
     .post('http://192.168.3.18:3000/register', userData)
-    .then((res) => console.log(res.data))
+    .then((res) => {
+        console.log(res.data);
+        navigation.navigate('Login'); // Navigate to Login screen after successful registration
+      })
     .catch((err) => console.log(err));
   }
 
