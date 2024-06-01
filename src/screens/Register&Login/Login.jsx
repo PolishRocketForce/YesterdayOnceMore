@@ -1,7 +1,29 @@
-const { View, Text, TextInput, TouchableOpacity } = require('react-native');
+const { View, Text, TextInput, TouchableOpacity, Alert} = require('react-native');
+import { useNavigation } from '@react-navigation/native';
 import styles from './style';
+import axios from 'axios';
+
 
 function Login() {
+  const navigation = useNavigation();
+  const [email,setEmail]= useState('');
+  const [password,setPassword]= useState('');
+
+  function handlesubmit(){
+    console.log(email,password);
+    const userData = {
+      email:email,
+      password,
+    }
+    axios
+    .post("http://192.168.3.18:3000/login-user",userData)
+    .then(res=>console.log(res.data))
+    if (res.data.status=='ok'){
+      Alert.alert("Logged In Successful");
+      navigation.navigate('Home');
+    }
+    //if not working: change 3000 to 5001
+  }
   return (
     <View>
 
@@ -14,11 +36,11 @@ function Login() {
       </View>
 
       <View style={styles.action}>
-        <TextInput placeholder='Email'  style={styles.textInput}/>
+        <TextInput placeholder='Email'  style={styles.textInput}onPress={()=>handlesubmit()}/>
       </View>
 
       <View style={styles.action}>
-        <TextInput placeholder='Password'  style={styles.textInput}/>
+        <TextInput placeholder='Password'  style={styles.textInput}onPress={()=>handlesubmit()}/>
       </View>
 
       <View style={styles.button}>
