@@ -18,7 +18,7 @@ function Login() {
       password,
     }
     axios
-    .post("http://localhost:3000/login-user",userData)
+    .post("http://137.132.26.131:3000/login-user",userData)
     .then(res=>console.log(res.data))
     if (res.data.status=='ok'){
       Alert.alert("Logged In Successful");

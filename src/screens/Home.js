@@ -10,7 +10,7 @@ export default function Home() {
             <Text>Home</Text>
             <Button title="Register" onPress={() => navigation.navigate('Register')} />
             <Button title="Login" onPress={() => navigation.navigate('Login')} />
-            <Button title="Continue as guest" onPress={() => navigation.navigate('App')} />
+            <Button title="Continue as guest" onPress={() => navigation.navigate('Dashboard')} />
         </View>
     );
 }
