@@ -19,7 +19,7 @@ function Register() {
     };
 
     axios
-    .post('http://137.132.26.131:3000/register', userData)
+    .post('http://192.168.3.18:3000/register', userData)
     .then((res) => console.log(res.data))
     .catch((err) => console.log(err));
   }

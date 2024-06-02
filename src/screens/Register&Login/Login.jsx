@@ -18,10 +18,11 @@ function Login() {
       password,
     }
     axios
-    .post("http://137.132.26.131:3000/login-user",userData)
+    .post("http://192.168.3.18:3000/login-user",userData)
     .then(res=>console.log(res.data))
     if (res.data.status=='ok'){
       Alert.alert("Logged In Successful");
+      navigation.navigate('Dashboard');
     }
     //if not working: change 3000 to 5001
   }
