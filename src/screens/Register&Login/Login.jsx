@@ -1,11 +1,11 @@
+import React, { useState } from 'react';
 const { View, Text, TextInput, TouchableOpacity, Alert} = require('react-native');
 import { useNavigation } from '@react-navigation/native';
 import styles from './style';
 import axios from 'axios';
 
 
-function Login() {
-  const navigation = useNavigation();
+function Login({ navigation }) {
   const [email,setEmail]= useState('');
   const [password,setPassword]= useState('');
 
@@ -17,11 +17,13 @@ function Login() {
     }
     axios
     .post("http://192.168.3.18:3000/login-user",userData)
-    .then(res=>console.log(res.data))
-    if (res.data.status=='ok'){
-      Alert.alert("Logged In Successful");
-      navigation.navigate('Home');
-    }
+    .then((res)=>{
+      console.log(res.data);
+      if (res.data.status=='ok'){
+        Alert.alert("Logged In Successfully!");
+        navigation.navigate("Dashboard");
+      }
+    });
     //if not working: change 3000 to 5001
   }
   return (
